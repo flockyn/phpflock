@@ -167,6 +167,14 @@ final class ArrTest extends TestCase
         $this->assertSame(self::keyCasePascalExpectedConversion(), $data);
     }
 
+    #[Test]
+    public function it_to_snake_keys_conversion(): void
+    {
+        $data = Arr::toSnakeKeys($this->dataKeyCaseConversion());
+
+        $this->assertSame(self::keyCaseSnakeExpectedConversion(), $data);
+    }
+
     private static function keyCaseCamelExpectedConversion(?array $nested = null): array
     {
         $nested ??= [

@@ -91,4 +91,15 @@ final class Arr
     {
         return self::keyCase($array, ArrKeyCase::Pascal, $depth);
     }
+
+    /**
+     * Change the case of array keys to the snake case.
+     *
+     * @param  array<array-key, mixed>  $array
+     * @return array<array-key, mixed>
+     */
+    public static function toSnakeKeys(array $array, float|int $depth = INF): array
+    {
+        return self::keyCase($array, ArrKeyCase::Snake, $depth);
+    }
 }
