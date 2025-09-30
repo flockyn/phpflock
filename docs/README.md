@@ -14,6 +14,310 @@ composer require flockyn/phpflock
 
 ## Utilities
 
+### Array
+
+The `Arr` class provides a robust and flexible collection of array manipulation methods.
+These utilities are designed to simplify common data transformation tasks, such as key casing and advanced mapping, in a clear and non-destructive manner.
+
+#### Available Methods
+
+- [Arr::keyCase](#method-array-key-case)
+- [Arr::mapWithKeys](#method-array-map-with-keys)
+- [Arr::toCamelKeys](#method-array-to-camel-keys)
+- [Arr::toKebabKeys](#method-array-to-kebab-keys)
+- [Arr::toPascalKeys](#method-array-to-pascal-keys)
+- [Arr::toSnakeKeys](#method-array-to-snake-keys)
+
+<a name="method-array-key-case"></a>
+##### `Arr::keyCase()`
+
+The `Arr::keyCase` method changes the case of array keys to a specified style.
+It supports recursive traversal with depth control and also accepts custom casing callbacks.
+
+###### Enum Values
+
+When using the `ArrKeyCase` enum, the following cases are available:
+
+| Enum                 | Example Conversion |
+|----------------------|--------------------|
+| `ArrKeyCase::Camel`  | `camelCase`        |
+| `ArrKeyCase::Kebab`  | `kebab-case`       |
+| `ArrKeyCase::Pascal` | `PascalCase`       |
+| `ArrKeyCase::Snake`  | `snake_case`       |
+
+```php
+use Cndrsdrmn\Warp\Arr;
+use Cndrsdrmn\Warp\Enums\ArrKeyCase;
+
+$array = [
+    'first_name' => 'John',
+    'last_name' => 'Doe',
+    'address' => [
+        'street_name' => 'Main Street',
+        'postal_code' => '12345',
+    ],
+];
+
+$camel = Arr::keyCase($array, ArrKeyCase::Camel);
+
+/*
+    [
+        'firstName' => 'John',
+        'lastName' => 'Doe',
+        'address' => [
+            'streetName' => 'Main Street',
+            'postalCode' => '12345',
+        ],
+    ]
+*/
+```
+
+You may also use a custom callback to transform the key:
+
+```php
+$upper = Arr::keyCase($array, fn ($key) => strtoupper($key));
+
+/*
+    [
+        'FIRST_NAME' => 'John',
+        'LAST_NAME' => 'Doe',
+        'ADDRESS' => [
+            'STREET_NAME' => 'Main Street',
+            'POSTAL_CODE' => '12345',
+        ],
+    ]
+*/
+```
+
+You may limit the transformation depth by passing the number of levels to transform:
+
+```php
+$shallow = Arr::keyCase($array, ArrKeyCase::Camel, 1);
+
+/*
+    [
+        'firstName' => 'John',
+        'lastName' => 'Doe',
+        'address' => [
+            'street_name' => 'Main Street',
+            'postal_code' => '12345',
+        ],
+    ]
+*/
+```
+<a name="method-array-map-with-keys"></a>
+##### `Arr::mapWithKeys()`
+
+The `Arr::mapWithKeys` method maps an array into a new array by running each value through a callback.
+The callback must return an associative array of key-value pairs:
+
+```php
+use Cndrsdrmn\Warp\Arr;
+
+$array = [
+    ['id' => 1, 'name' => 'John'],
+    ['id' => 2, 'name' => 'Jane'],
+];
+
+$result = Arr::mapWithKeys($array, fn ($item) => [
+    $item['id'] => $item['name'],
+]);
+
+// [1 => 'John', 2 => 'Jane']
+```
+
+<a name="method-array-to-camel-keys"></a>
+##### `Arr::toCamelKeys()`
+
+The `Arr::toCamelKeys` method converts all array keys to `camelCase`:
+
+```php
+use Cndrsdrmn\Warp\Arr;
+
+$array = [
+    'first_name' => 'John',
+    'last_name' => 'Doe',
+    'address' => [
+        'street_name' => 'Main Street',
+        'postal_code' => '12345',
+    ],
+];
+
+$camel = Arr::toCamelKeys($array);
+
+/*
+    [
+        'firstName' => 'John',
+        'lastName' => 'Doe',
+        'address' => [
+            'streetName' => 'Main Street',
+            'postalCode' => '12345',
+        ],
+    ]
+*/
+```
+
+Depth control is supported:
+
+```php
+$shallow = Arr::toCamelKeys($array, 1);
+
+/*
+    [
+        'firstName' => 'John',
+        'lastName' => 'Doe',
+        'address' => [
+            'street_name' => 'Main Street',
+            'postal_code' => '12345',
+        ],
+    ]
+*/
+```
+
+<a name="method-array-to-kebab-keys"></a>
+##### `Arr::toKebabKeys()`
+
+The `Arr::toKebabKeys` method converts all array keys to `kebab-case`:
+
+```php
+use Cndrsdrmn\Warp\Arr;
+
+$array = [
+    'first_name' => 'John',
+    'last_name' => 'Doe',
+    'address' => [
+        'street_name' => 'Main Street',
+        'postal_code' => '12345',
+    ],
+];
+
+$kebab = Arr::toKebabKeys($array);
+
+/*
+    [
+        'first-name' => 'John',
+        'last-name' => 'Doe',
+        'address' => [
+            'street-name' => 'Main Street',
+            'postal-code' => '12345',
+        ],
+    ]
+*/
+```
+
+Depth control is supported:
+
+```php
+$shallow = Arr::toKebabKeys($array, 1);
+
+/*
+    [
+        'first-name' => 'John',
+        'last-name' => 'Doe',
+        'address' => [
+            'street_name' => 'Main Street',
+            'postal_code' => '12345',
+        ],
+    ]
+*/
+```
+
+<a name="method-array-to-pascal-keys"></a>
+##### `Arr::toPascalKeys()`
+
+The `Arr::toPascalKeys` method converts all array keys to `PascalCase`:
+
+```php
+use Cndrsdrmn\Warp\Arr;
+
+$array = [
+    'first_name' => 'John',
+    'last_name' => 'Doe',
+    'address' => [
+        'street_name' => 'Main Street',
+        'postal_code' => '12345',
+    ],
+];
+
+$pascal = Arr::toPascalKeys($array);
+
+/*
+    [
+        'FirstName' => 'John',
+        'LastName' => 'Doe',
+        'Address' => [
+            'StreetName' => 'Main Street',
+            'PostalCode' => '12345',
+        ],
+    ]
+*/
+```
+
+Depth control is supported:
+
+```php
+$shallow = Arr::toPascalKeys($array, 1);
+
+/*
+    [
+        'FirstName' => 'John',
+        'LastName' => 'Doe',
+        'Address' => [
+            'street_name' => 'Main Street',
+            'postal_code' => '12345',
+        ],
+    ]
+*/
+```
+
+<a name="method-array-to-snake-keys"></a>
+##### `Arr::toSnakeKeys()`
+
+The `Arr::toSnakeKeys` method converts all array keys to `snake_case`:
+
+```php
+use Cndrsdrmn\Warp\Arr;
+
+$array = [
+    'first Name' => 'John',
+    'lastName' => 'Doe',
+    'address' => [
+        'StreetName' => 'Main Street',
+        'PostalCode' => '12345',
+    ],
+];
+
+$snake = Arr::toSnakeKeys($array);
+
+/*
+    [
+        'first_name' => 'John',
+        'last_name' => 'Doe',
+        'address' => [
+            'street_name' => 'Main Street',
+            'postal_code' => '12345',
+        ],
+    ]
+*/
+```
+
+Depth control is supported:
+
+```php
+$shallow = Arr::toSnakeKeys($array, 1);
+
+/*
+    [
+        'first_name' => 'John',
+        'last_name' => 'Doe',
+        'address' => [
+            'StreetName' => 'Main Street',
+            'PostalCode' => '12345',
+        ],
+    ]
+*/
+```
+
 ### String
 
 The `Str` class provides a variety of convenient functions for working with strings.
