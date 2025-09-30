@@ -143,6 +143,14 @@ final class ArrTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
+    #[Test]
+    public function it_to_camel_keys_conversion(): void
+    {
+        $data = Arr::toCamelKeys($this->dataKeyCaseConversion());
+
+        $this->assertSame(self::keyCaseCamelExpectedConversion(), $data);
+    }
+
     private static function keyCaseCamelExpectedConversion(?array $nested = null): array
     {
         $nested ??= [

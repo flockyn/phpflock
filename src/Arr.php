@@ -58,4 +58,15 @@ final class Arr
 
         return $result;
     }
+
+    /**
+     * Change the case of array keys to the camel case.
+     *
+     * @param  array<array-key, mixed>  $array
+     * @return array<array-key, mixed>
+     */
+    public static function toCamelKeys(array $array, float|int $depth = INF): array
+    {
+        return self::keyCase($array, ArrKeyCase::Camel, $depth);
+    }
 }
