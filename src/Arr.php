@@ -4,8 +4,34 @@ declare(strict_types=1);
 
 namespace Flockyn\PHPFlock;
 
+use Flockyn\PHPFlock\Enums\ArrKeyCase;
+
 final class Arr
 {
+    /**
+     * Change the case of array keys to the specified case.
+     *
+     * @param  array<array-key, mixed>  $array
+     * @param  ArrKeyCase|callable(string): string  $case
+     * @return array<array-key, mixed>
+     */
+    public static function keyCase(array $array, ArrKeyCase|callable $case, float|int $depth = INF): array
+    {
+        return self::mapWithKeys($array, static function ($value, int|string $key) use ($case, $depth): array {
+            if (is_array($value) && $depth > 1) {
+                $value = self::keyCase($value, $case, $depth - 1);
+            }
+
+            $newKey = $key;
+
+            if (is_string($newKey)) {
+                $newKey = is_callable($case) ? $case($key) : $case->convert($key);
+            }
+
+            return [$newKey => $value];
+        });
+    }
+
     /**
      * Map the given array using the given callback.
      *
