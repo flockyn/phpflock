@@ -22,13 +22,11 @@ final class Arr
                 $value = self::keyCase($value, $case, $depth - 1);
             }
 
-            $newKey = $key;
-
-            if (is_string($newKey)) {
-                $newKey = is_callable($case) ? $case($key) : $case->convert($key);
+            if (is_string($key)) {
+                $key = is_callable($case) ? $case($key) : $case->convert($key);
             }
 
-            return [$newKey => $value];
+            return [$key => $value];
         });
     }
 
