@@ -1,0 +1,58 @@
+{
+    "name": "flockyn/phpflock",
+    "description": "Essential, high-performance static utilities methods for common PHP tasks.",
+    "keywords": [
+        "php",
+        "utilities",
+        "helpers",
+        "tools",
+        "flockyn"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Candra Sudirman",
+            "email": "dev.cndrsdrmn@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "phpunit/phpunit": "^10.5",
+        "phpstan/phpstan": "^2.1",
+        "rector/rector": "^2.1",
+        "symfony/var-dumper": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Flockyn\\PHPFlock\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "lint": "pint",
+        "refactor": "rector",
+        "test:lint": "pint --test",
+        "test:refactor": "rector --dry-run",
+        "test:types": "phpstan",
+        "test:unit": "phpunit",
+        "test": [
+            "@test:lint",
+            "@test:unit",
+            "@test:types",
+            "@test:refactor"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist"
+    }
+}
