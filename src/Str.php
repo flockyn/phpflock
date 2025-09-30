@@ -22,6 +22,14 @@ final class Str
     }
 
     /**
+     * Convert a string to a kebab case.
+     */
+    public static function kebab(string $value): string
+    {
+        return self::snake($value, '-');
+    }
+
+    /**
      * Convert a string to a pascal case.
      */
     public static function pascal(string $value): string

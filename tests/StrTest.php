@@ -22,6 +22,17 @@ final class StrTest extends TestCase
     }
 
     #[Test]
+    public function it_kebab_conversion(): void
+    {
+        $this->assertSame('first-name', Str::kebab('first_name'));
+        $this->assertSame('api-key-value', Str::kebab('api-key-value'));
+        $this->assertSame('database-connection', Str::kebab('DatabaseConnection'));
+        $this->assertSame('user-id-and-url-path', Str::kebab('userIDAndURLPath'));
+        $this->assertSame('mixed-case-input-value', Str::kebab('mixed-case_input Value'));
+        $this->assertSame('first-name', Str::kebab('firstName'));
+    }
+
+    #[Test]
     public function it_pascal_conversion(): void
     {
         $this->assertSame('FirstName', Str::pascal('first_name'));
