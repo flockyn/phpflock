@@ -159,6 +159,14 @@ final class ArrTest extends TestCase
         $this->assertSame(self::keyCaseKebabExpectedConversion(), $data);
     }
 
+    #[Test]
+    public function it_to_pascal_keys_conversion(): void
+    {
+        $data = Arr::toPascalKeys($this->dataKeyCaseConversion());
+
+        $this->assertSame(self::keyCasePascalExpectedConversion(), $data);
+    }
+
     private static function keyCaseCamelExpectedConversion(?array $nested = null): array
     {
         $nested ??= [
