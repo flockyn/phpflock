@@ -22,6 +22,14 @@ final class Str
     }
 
     /**
+     * Convert a string to a snake case.
+     */
+    public static function snake(string $value, string $separator = '_'): string
+    {
+        return implode($separator, self::normalizeToWords($value));
+    }
+
+    /**
      * Normalize a string to words.
      *
      * @return list<string>
