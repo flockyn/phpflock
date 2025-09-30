@@ -14,6 +14,14 @@ final class Str
     private static array $normalizedWords = [];
 
     /**
+     * Convert a string to a camel case.
+     */
+    public static function camel(string $value): string
+    {
+        return lcfirst(self::pascal($value));
+    }
+
+    /**
      * Convert a string to a pascal case.
      */
     public static function pascal(string $value): string

@@ -11,6 +11,17 @@ use PHPUnit\Framework\TestCase;
 final class StrTest extends TestCase
 {
     #[Test]
+    public function it_camel_conversion(): void
+    {
+        $this->assertSame('firstName', Str::camel('first_name'));
+        $this->assertSame('apiKeyValue', Str::camel('api-key-value'));
+        $this->assertSame('databaseConnection', Str::camel('DatabaseConnection'));
+        $this->assertSame('userIdAndUrlPath', Str::camel('userIDAndURLPath'));
+        $this->assertSame('mixedCaseInputValue', Str::camel('mixed-case_input Value'));
+        $this->assertSame('firstName', Str::camel('firstName'));
+    }
+
+    #[Test]
     public function it_pascal_conversion(): void
     {
         $this->assertSame('FirstName', Str::pascal('first_name'));
