@@ -151,6 +151,14 @@ final class ArrTest extends TestCase
         $this->assertSame(self::keyCaseCamelExpectedConversion(), $data);
     }
 
+    #[Test]
+    public function it_to_kebab_keys_conversion(): void
+    {
+        $data = Arr::toKebabKeys($this->dataKeyCaseConversion());
+
+        $this->assertSame(self::keyCaseKebabExpectedConversion(), $data);
+    }
+
     private static function keyCaseCamelExpectedConversion(?array $nested = null): array
     {
         $nested ??= [
