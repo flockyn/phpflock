@@ -46,8 +46,8 @@ When using the `ArrKeyCase` enum, the following cases are available:
 | `ArrKeyCase::Snake`  | `snake_case`       |
 
 ```php
-use Cndrsdrmn\Warp\Arr;
-use Cndrsdrmn\Warp\Enums\ArrKeyCase;
+use Flockyn\PHPFlock\Arr;
+use Flockyn\PHPFlock\Enums\ArrKeyCase;
 
 $array = [
     'first_name' => 'John',
@@ -112,7 +112,7 @@ The `Arr::mapWithKeys` method maps an array into a new array by running each val
 The callback must return an associative array of key-value pairs:
 
 ```php
-use Cndrsdrmn\Warp\Arr;
+use Flockyn\PHPFlock\Arr;
 
 $array = [
     ['id' => 1, 'name' => 'John'],
@@ -132,7 +132,7 @@ $result = Arr::mapWithKeys($array, fn ($item) => [
 The `Arr::toCamelKeys` method converts all array keys to `camelCase`:
 
 ```php
-use Cndrsdrmn\Warp\Arr;
+use Flockyn\PHPFlock\Arr;
 
 $array = [
     'first_name' => 'John',
@@ -180,7 +180,7 @@ $shallow = Arr::toCamelKeys($array, 1);
 The `Arr::toKebabKeys` method converts all array keys to `kebab-case`:
 
 ```php
-use Cndrsdrmn\Warp\Arr;
+use Flockyn\PHPFlock\Arr;
 
 $array = [
     'first_name' => 'John',
@@ -228,7 +228,7 @@ $shallow = Arr::toKebabKeys($array, 1);
 The `Arr::toPascalKeys` method converts all array keys to `PascalCase`:
 
 ```php
-use Cndrsdrmn\Warp\Arr;
+use Flockyn\PHPFlock\Arr;
 
 $array = [
     'first_name' => 'John',
@@ -276,7 +276,7 @@ $shallow = Arr::toPascalKeys($array, 1);
 The `Arr::toSnakeKeys` method converts all array keys to `snake_case`:
 
 ```php
-use Cndrsdrmn\Warp\Arr;
+use Flockyn\PHPFlock\Arr;
 
 $array = [
     'first Name' => 'John',
@@ -336,7 +336,7 @@ These helpers make it easy to transform values into consistent formats, normaliz
 The `Str::camel` method converts the given string to `camelCase`:
 
 ```php
-use Cndrsdrmn\Warp\Str;
+use Flockyn\PHPFlock\Str;
 
 Str::camel('first_name');               // firstName
 Str::camel('api-key-value');            // apiKeyValue
@@ -352,7 +352,7 @@ Str::camel('firstName');                // firstName
 The `Str::kebab` method converts the given string to `kebab-case`:
 
 ```php
-use Cndrsdrmn\Warp\Str;
+use Flockyn\PHPFlock\Str;
 
 Str::kebab('first_name');               // first-name
 Str::kebab('api-key-value');            // api-key-value
@@ -368,7 +368,7 @@ Str::kebab('firstName');                // first-name
 The `Str::pascal` method converts the given string to `PascalCase`:
 
 ```php
-use Cndrsdrmn\Warp\Str;
+use Flockyn\PHPFlock\Str;
 
 Str::pascal('first_name');               // FirstName
 Str::pascal('api-key-value');            // ApiKeyValue
@@ -385,7 +385,7 @@ The `Str::snake` method converts the given string to `snake_case`.
 You may also specify a custom separator:
 
 ```php
-use Cndrsdrmn\Warp\Str;
+use Flockyn\PHPFlock\Str;
 
 Str::snake('first_name', '-');          // first-name
 Str::snake('api-key-value');            // api_key_value
