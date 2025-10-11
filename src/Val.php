@@ -40,4 +40,34 @@ final class Val
     {
         return ! self::blank($value);
     }
+
+    /**
+     * Determine if the given value is truthy.
+     */
+    public static function truthy(mixed $value): bool
+    {
+        if (is_bool($value)) {
+            return $value;
+        }
+
+        if (is_null($value)) {
+            return false;
+        }
+
+        if (is_numeric($value)) {
+            return (float) $value !== 0.0;
+        }
+
+        if ($value instanceof Countable) {
+            return count($value) > 0;
+        }
+
+        if (is_string($value) || $value instanceof Stringable) {
+            $str = mb_strtolower(trim((string) $value));
+
+            return $str !== '' && ! in_array($str, ['0', 'false', 'no', 'off', 'null', 'none'], true);
+        }
+
+        return ! empty($value);
+    }
 }
