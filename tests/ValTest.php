@@ -34,6 +34,27 @@ final class ValTest extends TestCase
     }
 
     #[Test]
+    public function it_falsy(): void
+    {
+        $this->assertTrue(Val::falsy(false));
+        $this->assertTrue(Val::falsy(null));
+        $this->assertTrue(Val::falsy(0));
+        $this->assertTrue(Val::falsy(0.0));
+        $this->assertTrue(Val::falsy($this->toValCountable(0)));
+        $this->assertTrue(Val::falsy(''));
+        $this->assertTrue(Val::falsy(' '));
+        $this->assertTrue(Val::falsy($this->toValStringable('')));
+        $this->assertTrue(Val::falsy($this->toValStringable(' ')));
+        $this->assertTrue(Val::falsy([]));
+
+        $this->assertFalse(Val::falsy(true));
+        $this->assertFalse(Val::falsy([1, 2, 3]));
+        $this->assertFalse(Val::falsy('foo'));
+        $this->assertFalse(Val::falsy($this->toValStringable('foo')));
+        $this->assertFalse(Val::falsy($this->toValCountable(1)));
+    }
+
+    #[Test]
     public function it_present(): void
     {
         $this->assertFalse(Val::present(null));

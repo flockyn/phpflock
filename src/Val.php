@@ -34,6 +34,14 @@ final class Val
     }
 
     /**
+     * Determine if the given value is falsy.
+     */
+    public static function falsy(mixed $value): bool
+    {
+        return ! self::truthy($value);
+    }
+
+    /**
      * Determine if the given value is present.
      */
     public static function present(mixed $value): bool
