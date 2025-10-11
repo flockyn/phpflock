@@ -21,12 +21,25 @@ These utilities are designed to simplify common data transformation tasks, such 
 
 #### Available Methods
 
+- [Arr::isAssoc](#method-array-is-assoc)
 - [Arr::keyCase](#method-array-key-case)
 - [Arr::mapWithKeys](#method-array-map-with-keys)
 - [Arr::toCamelKeys](#method-array-to-camel-keys)
 - [Arr::toKebabKeys](#method-array-to-kebab-keys)
 - [Arr::toPascalKeys](#method-array-to-pascal-keys)
 - [Arr::toSnakeKeys](#method-array-to-snake-keys)
+
+<a name="method-array-is-assoc"></a>
+##### `Arr::isAssoc()`
+
+The `Arr::isAssoc` method determines if the given array is associative.
+
+```php
+use Flockyn\PHPFlock\Arr;
+
+Arr::isAssoc(['a' => 1, 'b' => 2, 'c' => 3]) // true
+Arr::isAssoc([1, 2, 3]) // false
+```
 
 <a name="method-array-key-case"></a>
 ##### `Arr::keyCase()`
