@@ -22,6 +22,7 @@ These utilities are designed to simplify common data transformation tasks, such 
 #### Available Methods
 
 - [Arr::isAssoc](#method-array-is-assoc)
+- [Arr::isList](#method-array-is-list)
 - [Arr::keyCase](#method-array-key-case)
 - [Arr::mapWithKeys](#method-array-map-with-keys)
 - [Arr::toCamelKeys](#method-array-to-camel-keys)
@@ -39,6 +40,18 @@ use Flockyn\PHPFlock\Arr;
 
 Arr::isAssoc(['a' => 1, 'b' => 2, 'c' => 3]) // true
 Arr::isAssoc([1, 2, 3]) // false
+```
+
+<a name="method-array-is-list"></a>
+##### `Arr::isList()`
+
+The `Arr::isList` method determines if the given array is a list.
+
+```php
+use Flockyn\PHPFlock\Arr;
+
+Arr::isList([1, 2, 3]) // true
+Arr::isList(['a' => 1, 'b' => 2, 'c' => 3]) // false
 ```
 
 <a name="method-array-key-case"></a>
