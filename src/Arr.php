@@ -9,6 +9,20 @@ use Flockyn\PHPFlock\Enums\ArrKeyCase;
 final class Arr
 {
     /**
+     * Determine whether the given array is associative.
+     *
+     * @param  array<array-key, mixed>  $array
+     */
+    public static function isAssoc(array $array): bool
+    {
+        if (Val::blank($array)) {
+            return false;
+        }
+
+        return ! array_is_list($array);
+    }
+
+    /**
      * Change the case of array keys to the specified case.
      *
      * @param  array<array-key, mixed>  $array
