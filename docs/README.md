@@ -394,3 +394,161 @@ Str::snake('userIDAndURLPath');         // user_id_and_url_path
 Str::snake('mixed-case_input Value');   // mixed_case_input_value
 Str::snake('firstName');                // first_name
 ```
+
+### Value
+
+The `Val` class provides a suite of static methods for **comprehensive and consistent value inspection**, evaluation, and type checking across your application.  
+This makes `Val` an essential tool for standardizing validation and writing reliable conditional logic throughout your codebase.
+
+#### Available Methods
+
+- [Val::blank](#method-value-blank)
+- [Val::falsy](#method-value-falsy)
+- [Val::present](#method-value-present)
+- [Val::truthy](#method-value-truthy)
+
+<a name="method-value-blank"></a>
+##### `Val::blank()`
+
+The `Val::blank` method determines if the given value is “blank.”
+A value is considered blank if it is:
+- `null`
+- An empty string (including whitespace)
+- An empty array 
+- A `Countable` object with zero count
+
+Numeric and boolean values are never **considered blank**.
+
+```php
+use Flockyn\PHPFlock\Val;
+
+Val::blank(null);           // true
+Val::blank('');             // true
+Val::blank('   ');          // true
+Val::blank([]);             // true
+
+Val::blank('foo');          // false
+Val::blank([1, 2, 3]);      // false
+Val::blank(0);              // false
+Val::blank(false);          // false
+```
+
+It also supports objects implementing the `Countable` or `Stringable` interfaces:
+
+```php
+use Flockyn\PHPFlock\Val;
+
+$countable = new class implements Countable {
+    public function count(): int
+    {
+        return 0;
+    }
+};
+
+Val::blank($countable); // true
+
+$stringable = new class implements Stringable {
+    public function __toString(): string
+    {
+        return '';
+    }
+};
+
+Val::blank($stringable) // true
+```
+
+<a name="method-value-falsy"></a>
+##### `Val::falsy()`
+
+The `Val::falsy` method determines if the given value is falsy, which is the opposite of `Val::truthy`.
+It extends PHP’s native boolean casting rules with more human-friendly semantics for string values like `"false"`, `"no"`, `"off"`, `"null"`, or `"none"`.
+
+```php
+use Flockyn\PHPFlock\Val;
+
+Val::falsy(false);          // true
+Val::falsy(null);           // true
+Val::falsy(0);              // true
+Val::falsy(0.0);            // true
+Val::falsy('0');            // true
+Val::falsy('false');        // true
+Val::falsy('no');           // true
+Val::falsy('off');          // true
+Val::falsy('null');         // true
+Val::falsy('none');         // true
+Val::falsy('');             // true
+Val::falsy([]);             // true
+
+Val::falsy(true);           // false
+Val::falsy(1);              // false
+Val::falsy('yes');          // false
+Val::falsy('on');           // false
+Val::falsy('something');    // false
+Val::falsy([1, 2]);         // false
+```
+
+<a name="method-value-present"></a>
+##### `Val::present()`
+
+The `Val::present` method determines if the given value is **not blank**, i.e., it contains meaningful content.
+This method is the direct inverse of `Val::blank`.
+
+```php
+use Flockyn\PHPFlock\Val;
+
+Val::present('hello');      // true
+Val::present([1, 2]);       // true
+Val::present(0);            // true
+Val::present(false);        // true
+
+Val::present('');           // false
+Val::present('   ');        // false
+Val::present([]);           // false
+Val::present(null);         // false
+```
+
+This is particularly useful when filtering collections or validating request payloads:
+
+```php
+$data = ['name' => '', 'email' => 'john@example.com'];
+
+$filtered = array_filter($data, [Val::class, 'present']);
+
+// ['email' => 'john@example.com']
+```
+
+<a name="method-value-truthy"></a>
+##### `Val::truthy()`
+
+The `Val::truthy` method determines if the given value is **truthy**.
+It evaluates booleans, numerics, strings, and arrays according to intuitive truthy semantics.
+
+Rules:
+
+- Booleans: `true` is truthy, `false` is not.
+- Numerics: non-zero values are truthy. 
+- Strings: non-empty and not one of `["0", "false", "no", "off", "null", "none"]`. 
+- Countable: returns true if count > 0.
+
+```php
+use Flockyn\PHPFlock\Val;
+
+Val::truthy(true);          // true
+Val::truthy(1);             // true
+Val::truthy(3.14);          // true
+Val::truthy('yes');         // true
+Val::truthy('ok');          // true
+Val::truthy([1, 2, 3]);     // true
+
+Val::truthy(false);         // false
+Val::truthy(null);          // false
+Val::truthy(0);             // false
+Val::truthy('0');           // false
+Val::truthy('false');       // false
+Val::truthy('no');          // false
+Val::truthy('off');         // false
+Val::truthy('null');        // false
+Val::truthy('none');        // false
+Val::truthy([]);            // false
+Val::truthy('');            // false
+```
