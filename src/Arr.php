@@ -23,6 +23,20 @@ final class Arr
     }
 
     /**
+     * Determine whether the given array is a list.
+     *
+     * @param  array<array-key, mixed>  $array
+     */
+    public static function isList(array $array): bool
+    {
+        if (Val::blank($array)) {
+            return false;
+        }
+
+        return array_is_list($array);
+    }
+
+    /**
      * Change the case of array keys to the specified case.
      *
      * @param  array<array-key, mixed>  $array

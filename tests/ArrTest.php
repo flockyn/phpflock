@@ -134,6 +134,13 @@ final class ArrTest extends TestCase
         $this->assertFalse(Arr::isAssoc([1, 2, 3]));
     }
 
+    #[Test]
+    public function it_is_list(): void
+    {
+        $this->assertTrue(Arr::isList([1, 2, 3]));
+        $this->assertFalse(Arr::isList(['a' => 1, 'b' => 2, 'c' => 3]));
+    }
+
     #[Test, DataProvider('dataProviderKeyCase')]
     public function it_key_case_conversion(array $expected, ArrKeyCase|callable $case, float|int $depth): void
     {
