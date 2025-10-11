@@ -5,11 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/flockyn/phpflock/compare/v1.1.0...1.x)
+## [Unreleased](https://github.com/flockyn/phpflock/compare/v1.2.0...1.x)
 
 Please do not update the unreleased notes.
 
 <!-- Content should be placed here -->
+## [v1.2.0](https://github.com/flockyn/phpflock/compare/v1.1.0...v1.2.0) - 2025-10-11
+
+* [1.x] Introduces `Val` utilities by [@cndrsdrmn](https://github.com/cndrsdrmn) in https://github.com/flockyn/phpflock/pull/5
+* [1.x] Introduce `Arr::isAssoc` to check if an array is associative by [@cndrsdrmn](https://github.com/cndrsdrmn) in https://github.com/flockyn/phpflock/pull/6
+* [1.x] Introduce `Arr::isList` to check if an array is list by [@cndrsdrmn](https://github.com/cndrsdrmn) in https://github.com/flockyn/phpflock/pull/7
+
 ## [v1.1.0](https://github.com/flockyn/phpflock/compare/v1.0.0...v1.1.0) - 2025-09-30
 
 * [1.x] Remove an example class and test by [@cndrsdrmn](https://github.com/cndrsdrmn) in https://github.com/flockyn/phpflock/pull/3
