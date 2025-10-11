@@ -32,4 +32,12 @@ final class Val
 
         return empty($value);
     }
+
+    /**
+     * Determine if the given value is present.
+     */
+    public static function present(mixed $value): bool
+    {
+        return ! self::blank($value);
+    }
 }

@@ -33,6 +33,27 @@ final class ValTest extends TestCase
         $this->assertFalse(Val::blank($this->toValCountable(1)));
     }
 
+    #[Test]
+    public function it_present(): void
+    {
+        $this->assertFalse(Val::present(null));
+        $this->assertFalse(Val::present($this->toValCountable(0)));
+        $this->assertFalse(Val::present(''));
+        $this->assertFalse(Val::present(' '));
+        $this->assertFalse(Val::present($this->toValStringable('')));
+        $this->assertFalse(Val::present($this->toValStringable(' ')));
+        $this->assertFalse(Val::present([]));
+
+        $this->assertTrue(Val::present([1, 2, 3]));
+        $this->assertTrue(Val::present('foo'));
+        $this->assertTrue(Val::present($this->toValStringable('foo')));
+        $this->assertTrue(Val::present(0));
+        $this->assertTrue(Val::present(0.0));
+        $this->assertTrue(Val::present(true));
+        $this->assertTrue(Val::present(false));
+        $this->assertTrue(Val::present($this->toValCountable(1)));
+    }
+
     private function toValCountable(int $value): Countable
     {
         return new class($value) implements Countable
